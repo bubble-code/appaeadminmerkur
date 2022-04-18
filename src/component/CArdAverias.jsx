@@ -1,19 +1,23 @@
 import React from "react";
 import { Panel, Row, Col, Button } from 'rsuite';
 
-const CardSalones = ({ id }) => {
+const CardAverias = ({ data }) => {
 
   return (
-    <Col md={6} sm={12} >
-      <Panel header={id} bordered shaded bodyFill style={{ width: 300, marginBottom: 20 }}>
-        <p>
-          <small>
-            A suite of React components, sensible UI design, and a friendly development experience.
-          </small>
-        </p>
-        <Button>Click</Button>
-      </Panel>
-    </Col>
+    <Panel header={data.salon} collapsible bordered shaded bodyFill style={{ width: 300, marginBottom: 20 }}>
+      <p>
+        <small>
+          {data.subject}
+        </small>
+      </p>
+      <p>
+        <small>
+          {data.id} {data.date}
+        </small>
+      </p>
+      <Button>Click</Button>
+    </Panel>
+
   )
 }
-export default CardSalones;
+export default CardAverias;

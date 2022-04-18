@@ -8,7 +8,7 @@ const AppBar = () => {
 
   return (
     <div>
-      <Navbar>
+      <Navbar style={{backgroundColor:'#59AFFF'}}>
         <Navbar.Brand >
           <Link to="/" >
             MEKUR SLOTS

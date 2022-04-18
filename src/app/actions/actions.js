@@ -1,4 +1,4 @@
-import { LIST_SALONES_COMUNIDAD } from './types';
+import { LIST_SALONES_COMUNIDAD, LIST_AVERIAS_SALON } from './types';
 import DataServices from '../../services/services'
 
 export const listSalonesComunidad = (name) => {
@@ -8,6 +8,16 @@ export const listSalonesComunidad = (name) => {
       type: LIST_SALONES_COMUNIDAD,
       payload: res.data
     });
-    // return Promise.resolve(res.data)   
+  }
+}
+export const listAveriasSalon = (salon) => async (dispatch) => {
+  try {
+    const res = await DataServices.getAverias(salon);
+    dispatch({
+      type: LIST_AVERIAS_SALON,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.error(error);
   }
 }
