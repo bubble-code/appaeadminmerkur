@@ -17,7 +17,7 @@ function App() {
           <Route path='avisos/:id' element={<AvisosView />} />
           <Route path='objetivos/:id' element={<ObjectivosView />} />
           <Route path='tecnicos/:id' element={<TecnicosView />} />
-          <Route path='checklist/:id' element={<ChecklistView />} />
+          <Route path='checklist/' element={<ChecklistView />} />
           <Route path='*' element={<NoMatch />} />
         </Route>
       </Routes>

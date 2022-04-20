@@ -1,4 +1,4 @@
-import { LIST_SALONES_COMUNIDAD, LIST_AVERIAS_SALON } from './types';
+import { LIST_SALONES_COMUNIDAD, LIST_AVERIAS_SALON, LIST_CHECKLIST } from './types';
 import DataServices from '../../services/services'
 
 export const listSalonesComunidad = (name) => {
@@ -18,6 +18,17 @@ export const listAveriasSalon = (salon) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    console.error(error);
+    console.error(error); 
+  }
+}
+export const lisTareas = () => async (dispatch) => {
+  try {
+    const res = await DataServices.getChecklist();
+    dispatch({
+      type: LIST_CHECKLIST,
+      payload: res.data,
+    })
+  } catch (error) {
+    console.error(error)
   }
 }

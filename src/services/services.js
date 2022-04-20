@@ -8,6 +8,9 @@ class DataServices {
   getAverias(salon) {
     return http.get(`/averias/${salon}`);
   }
+  getChecklist() {
+    return http.get("/checklist");
+  }
 }
 
 

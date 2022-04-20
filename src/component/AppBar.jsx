@@ -8,7 +8,7 @@ const AppBar = () => {
 
   return (
     <div>
-      <Navbar style={{backgroundColor:'#59AFFF'}}>
+      <Navbar style={{ backgroundColor: '#59AFFF' }}>
         <Navbar.Brand >
           <Link to="/" >
             MEKUR SLOTS
@@ -110,28 +110,11 @@ const AppBar = () => {
             </Dropdown.Item>
           </Dropdown>
           {/* CheckList */}
-          <Dropdown title="CheckList">
-            <Dropdown.Item>
-              <Link to="/checklist/Cantabria">
-                Cantabria
-              </Link>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Link to="/checklist/Madrid">
-                Madrid
-              </Link>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Link to="/checklist/Mallorca">
-                Mallorca
-              </Link>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Link to="/checklist/Navarra">
-                Navarra
-              </Link>
-            </Dropdown.Item>
-          </Dropdown>
+          <Nav.Item>
+            <Link to="/checklist" >
+              Tareas
+            </Link>
+          </Nav.Item>
           {/* Objetivos */}
           <Dropdown title="Objetivos">
             <Dropdown.Item>

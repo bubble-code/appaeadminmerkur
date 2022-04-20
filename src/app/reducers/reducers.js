@@ -1,4 +1,4 @@
-import { LIST_SALONES_COMUNIDAD, LIST_AVERIAS_SALON } from "../actions/types";
+import { LIST_SALONES_COMUNIDAD, LIST_AVERIAS_SALON, LIST_CHECKLIST } from "../actions/types";
 
 const initialState = { salones: [] };
 
@@ -10,7 +10,7 @@ const merkurReducer = (state = initialState, action) => {
     case LIST_AVERIAS_SALON:
       return { salones: payload }
     default:
-      return state;
+      return state; 
 
   }
 }
