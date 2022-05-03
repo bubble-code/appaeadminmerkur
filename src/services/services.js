@@ -11,6 +11,12 @@ class DataServices {
   getChecklist() {
     return http.get("/checklist");
   }
+  createCheckList(formValue) {
+    return http.post(`/checklist`, formValue);
+  }
+  deleteCheckList(id) {
+    return http.delete(`/checklist/${id}`);
+  }
 }
 
 
