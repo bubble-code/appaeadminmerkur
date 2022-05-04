@@ -2,8 +2,14 @@ import http from '../http-common';
 
 class DataServices {
 
+  getComunidades() {
+    return http.get('/comunidades');
+  }
   getSalones(name) {
     return http.get(`/listplayroom/${name}`);
+  }
+  addSalon(values) {
+    return http.post('/listplayroom', values);
   }
   getAverias(salon) {
     return http.get(`/averias/${salon}`);
@@ -17,6 +23,7 @@ class DataServices {
   deleteCheckList(id) {
     return http.delete(`/checklist/${id}`);
   }
+
 }
 
 

@@ -18,7 +18,7 @@ const AppBar = () => {
         <Nav>
           <Nav.Item>Home</Nav.Item>
           {/* Salones */}
-          <Dropdown title="Salones">
+          {/* <Dropdown title="Salones">
             <Dropdown.Item>
               <Link to="/salones/Cantabria">
                 Cantabria
@@ -39,7 +39,14 @@ const AppBar = () => {
                 Navarra
               </Link>
             </Dropdown.Item>
-          </Dropdown>
+          </Dropdown> */}
+          <Nav.Item>
+            <Link to="/salonesCom" >
+              Salones
+            </Link>
+          </Nav.Item>
+
+
           {/* Tecnicos */}
           <Dropdown title="Tecnicos">
             <Dropdown.Item>

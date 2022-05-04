@@ -3,7 +3,8 @@ import './App.css';
 import 'rsuite/dist/rsuite.min.css';
 import AppBar from './component/AppBar';
 import { Route, Routes } from 'react-router-dom';
-import { Home, GeweteView, SalonesView, AveriasView, AvisosView, ObjectivosView, TecnicosView, ChecklistView, NoMatch } from './view'
+import { Home, GeweteView, SalonesView, AveriasView, AvisosView, ObjectivosView, TecnicosView, ChecklistView, NoMatch , ViewSalones} from './view'
+
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='gewete/:id' element={<GeweteView />} />
           <Route path='salones/:id' element={<SalonesView />} />
+          <Route path='salonesCom' element={<ViewSalones />} />
           <Route path='averias/:id' element={<AveriasView />} />
           <Route path='avisos/:id' element={<AvisosView />} />
           <Route path='objetivos/:id' element={<ObjectivosView />} />
