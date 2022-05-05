@@ -13,8 +13,8 @@ const CardCheckList = ({ activeCheck }) => {
       <Panel bordered aria-setsize={4} className={index === currentIndex ? "active" : ""}
         style={{ background: (index === currentIndex ? "blue" : "white") }}
         onClick={() => {
-          activeCheck(item)
-          setCurrentIndex(index)
+          activeCheck(item);
+          setCurrentIndex(index);
         }}
       >
         <div>{item["detalles"]}</div>
