@@ -35,7 +35,7 @@ const ChecklistView = () => {
           <CardCheckList activeCheck={activeCheck} />
         </Panel>
       </Col >
-      <Col xs={6}>
+      <Col xs={6} >
         <Panel bordered shaded>
           <DetailsCheckList activeCheckList={activeCheckList} />
         </Panel>

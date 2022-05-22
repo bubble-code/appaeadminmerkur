@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Grid, Panel, Row } from 'rsuite';
-import { listComunidades, listSalonesComunidad } from '../app/actions/actions'
+import { listComunidades, listSalonesComunidad } from '../app/actions/actions';
+import GoogleMapReact from "google-map-react";
 
 export const ViewSalones = () => {
   const dispatch = useDispatch();
@@ -9,12 +10,14 @@ export const ViewSalones = () => {
   const comunidades = useSelector((state) => state.comunidades);
   const salones = useSelector((state) => state.salones)
   const arr = comunidades["comunidades"];
-  const arrSalones = salones['salones']
+  let arrSalones = salones['salones'];
+  const coordinates = { lat: 0, lng: 0 };
   useEffect(() => {
     dispatch(listComunidades());
   }, []);
   const getSalones = (comunidad) => {
     dispatch(listSalonesComunidad(comunidad))
+    arrSalones = [];
   }
   return (<>
     <Grid fluid>
@@ -38,7 +41,21 @@ export const ViewSalones = () => {
             <div>{item["id"]}</div>
           </Panel>
         ))}
+      </Col>
+      <Col xs={6}>
+        <Panel bordered style={{height:'85vh', width:'700px', background:'grey'}}>
+          <GoogleMapReact bootstrapURLKeys={{ key: 'AIzaSyBTg_3jO5k-Hhb1vesjfgkOZq1gBJ0zSps' }}
+            defaultCenter={coordinates}
+            center={coordinates}
+            defaultZoom={14}
+            margin={[50, 50, 50, 50]}
+            options={''}
+            onChange={''}
+            onChildClick={''}
+          >
 
+          </GoogleMapReact>
+        </Panel>
       </Col>
     </Grid>
   </>)

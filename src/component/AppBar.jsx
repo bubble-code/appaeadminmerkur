@@ -1,22 +1,28 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { Navbar, Nav, Dropdown } from 'rsuite'
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice'
+import { Navbar, Nav, Dropdown } from 'rsuite';
+import '../styles/login.css';
 
 
 
 const AppBar = () => {
 
+  const user = useSelector(selectUser);
   return (
     <div>
-      <Navbar style={{ backgroundColor: '#59AFFF' }}>
-        <Navbar.Brand >
-          <Link to="/" >
-            MEKUR SLOTS
+      <Navbar style={{ backgroundColor: '#59AFFF' }} className={'brand'}>
+        <Navbar.Brand  >
+          <Link to="/" style={{ color: 'white' }} >
+            MERKUR SLOTS
           </Link>
 
         </Navbar.Brand>
         <Nav>
-          <Nav.Item>Home</Nav.Item>
+          {/* ------------------------------------- */}
+          {/* <Nav.Item>Home</Nav.Item> */}
+          {/* =================================== */}
           {/* Salones */}
           {/* <Dropdown title="Salones">
             <Dropdown.Item>
@@ -40,15 +46,17 @@ const AppBar = () => {
               </Link>
             </Dropdown.Item>
           </Dropdown> */}
-          <Nav.Item>
+          {/* ============================================ */}
+          {/* <Nav.Item>
             <Link to="/salonesCom" >
               Salones
             </Link>
-          </Nav.Item>
+          </Nav.Item> */}
+          {/* ============================================ */}
 
-
+          {/* ======================================================== */}
           {/* Tecnicos */}
-          <Dropdown title="Tecnicos">
+          {/* <Dropdown title="Tecnicos">
             <Dropdown.Item>
               <Link to="/tecnicos/Cantabria">
                 Cantabria
@@ -69,9 +77,26 @@ const AppBar = () => {
                 Navarra
               </Link>
             </Dropdown.Item>
-          </Dropdown>
+          </Dropdown> */}
+          {/* ============================================== */}
+          {/* ================================================= */}
           {/* Averias */}
-          <Dropdown title="Averias">
+          {user.loggedin ? <Dropdown title="Averias">
+            <Dropdown.Item>
+              <Link to="/addAveria">
+                Abrir nueva Averia
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to="/addAveria">
+                Listado de Averias
+              </Link>
+            </Dropdown.Item>                      
+          </Dropdown> : <></>}
+
+
+
+          {/* <Dropdown title="Averias">
             <Dropdown.Item>
               <Link to="/averias/Cantabria">
                 Cantabria
@@ -92,9 +117,13 @@ const AppBar = () => {
                 Navarra
               </Link>
             </Dropdown.Item>
-          </Dropdown>
+          </Dropdown> */}
+
+
+          {/* ============================================== */}
+          {/* ================================================= */}
           {/* Avisos */}
-          <Dropdown title="Avisos">
+          {/* <Dropdown title="Avisos">
             <Dropdown.Item>
               <Link to="/avisos/Cantabria">
                 Cantabria
@@ -115,15 +144,17 @@ const AppBar = () => {
                 Navarra
               </Link>
             </Dropdown.Item>
-          </Dropdown>
+          </Dropdown> */}
+          {/* =============================================== */}
+          {/* =============================================== */}
           {/* CheckList */}
-          <Nav.Item>
+          {/* <Nav.Item>
             <Link to="/checklist" >
               Tareas
             </Link>
-          </Nav.Item>
+          </Nav.Item> */}
           {/* Objetivos */}
-          <Dropdown title="Objetivos">
+          {/* <Dropdown title="Objetivos">
             <Dropdown.Item>
               <Link to="/objetivos/Cantabria">
                 Cantabria
@@ -144,11 +175,12 @@ const AppBar = () => {
                 Navarra
               </Link>
             </Dropdown.Item>
-          </Dropdown>
+          </Dropdown> */}
+          {/* =============================================== */}
         </Nav>
-        <Nav pullRight>
+        {/* <Nav pullRight>
           <Nav.Item >Settings</Nav.Item>
-        </Nav>
+        </Nav> */}
       </Navbar>
       <Outlet />
     </div>)

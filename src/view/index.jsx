@@ -8,7 +8,9 @@ import Home from './Home';
 import SalonesView from './Salones';
 import ChecklistView from './CheckList';
 import NoMatch from './NoMatch';
-import {ViewSalones} from './ViewSalones'
+import { ViewSalones } from './ViewSalones'
+import Login from './LoginPage'
+import AveriaViewADD from './AveriaViewADD'
 
-export { Home, NoMatch, SalonesView, ObjectivosView, TecnicosView, AveriasView, AvisosView, GeweteView, ChecklistView , ViewSalones };
+export { Login, Home, NoMatch, SalonesView, ObjectivosView, TecnicosView, AveriasView, AvisosView, GeweteView, ChecklistView, ViewSalones, AveriaViewADD };
 

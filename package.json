@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mobiscroll/react": "https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.16.1.tgz",
     "@reduxjs/toolkit": "^1.8.1",
     "@rsuite/icons": "^1.0.2",
     "@testing-library/jest-dom": "^4.2.4",
@@ -18,7 +19,8 @@
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
-    "rsuite": "^5.8.1"
+    "rsuite": "^5.8.1",
+    "use-query-params": "^1.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
