@@ -12,5 +12,17 @@ import { ViewSalones } from './ViewSalones'
 import Login from './LoginPage'
 import AveriaViewADD from './AveriaViewADD'
 
-export { Login, Home, NoMatch, SalonesView, ObjectivosView, TecnicosView, AveriasView, AvisosView, GeweteView, ChecklistView, ViewSalones, AveriaViewADD };
+export { Login, 
+  Home, 
+  NoMatch, 
+  SalonesView, 
+  ObjectivosView, 
+  TecnicosView, 
+  AveriasView, 
+  AvisosView, 
+  GeweteView, 
+  ChecklistView, 
+  ViewSalones, 
+  AveriaViewADD,
+ };
 
