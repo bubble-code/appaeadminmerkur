@@ -91,7 +91,19 @@ const AppBar = () => {
               <Link to="/addAveria">
                 Listado de Averias
               </Link>
-            </Dropdown.Item>                      
+            </Dropdown.Item>
+          </Dropdown> : <></>}
+          {user.username === "Admin" ? <Dropdown title="Ruletas">
+            <Dropdown.Item>
+              <Link to="/ruleta">
+                Opciones de Rultas
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to="/addAveria">
+                Listado de Rultas
+              </Link>
+            </Dropdown.Item>
           </Dropdown> : <></>}
 
 

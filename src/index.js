@@ -6,6 +6,7 @@ import stored from './app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <Provider store={stored}>

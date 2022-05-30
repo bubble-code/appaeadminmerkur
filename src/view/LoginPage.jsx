@@ -13,6 +13,10 @@ import '../styles/login.css'
 const Login = () => {
   const users = [
     {
+      user: 'Admin',
+      pass: '123'
+    },
+    {
       user: 'Alcala 260',
       pass: '123'
     },

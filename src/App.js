@@ -5,6 +5,8 @@ import AppBar from './component/AppBar';
 import { Route, Routes } from 'react-router-dom';
 import { Login, Home, GeweteView, SalonesView, AveriasView, AvisosView, ObjectivosView, TecnicosView, ChecklistView, NoMatch, ViewSalones, AveriaViewADD } from './view'
 import RequireAuth from './component/RequireAuth'
+import RultaPage from './view/RuleraPage';
+import 'antd/dist/antd.css';
 
 const ROLES = {
   'User': 2001,
@@ -25,6 +27,7 @@ function App() {
             {/* protect routes */}
             <Route path='/' element={<Home />} />
             <Route path='addAveria/' element={<AveriaViewADD />} />
+            <Route path='ruleta/' element={<RultaPage />} />
             <Route element={<RequireAuth allowedRoles={ROLES.Admin} />}>
               <Route path='gewete/:id' element={<GeweteView />} />
               <Route path='salones/:id' element={<SalonesView />} />
