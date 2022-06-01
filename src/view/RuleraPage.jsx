@@ -1,204 +1,235 @@
-import React, { useState } from 'react';
-import { Form, Row, Col, Button, Input, PageHeader, Card } from 'antd';
+import React, { useContext, useState, useEffect, useRef , createElement, useCallback} from 'react';
+import { Row, Col, PageHeader, Table, Input, Button, Popconfirm, Form } from 'antd';
 import 'antd/dist/antd.css';
 import { PlusCircleFilled } from '@ant-design/icons'
+import { useTable } from 'react-table';
 
-const style = React.CSSProperties = { padding: '8px ,0' };
+
+// let table = createTable()
+//   .setRowType()
+//   .setTableMetaType();
+const defaultColumns = {
+  cell: ({ getValue, row: { index }, column: { id }, instace }) => {
+    const initialValue = getValue();
+    const [value, setValue] = useState(initialValue);
+    const onBlur = () => {
+      var _a;
+      (_a = instace.options.meta) == null || _a === void 0 ? void 0 : _a.updateData(index, id, value);
+    }
+    useEffect(() => {
+      setValue(initialValue);
+    }, [initialValue]);
+    return (createElement(Input, { value: value, onChange: e => setValue(e.target.value), onBlur: onBlur }));
+  }
+};
+
+function useSkipper(){
+  const shouldSkipRef  = useRef(true);
+  const shouldSkip = shouldSkipRef.current;
+  const skip = useCallback
+}
 
 const RultaPage = () => {
-  const [stakeValues, setStakeValues] = useState({});
-  function handleChange(e) {
-    const { key, value } = e.target;
-    setStakeValues({ ...stakeValues, [key]: value });
-  }
 
-  return (
-    <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 18 }} lg={{ span: 18 }} xl={{ span: 24 }}>
-      <PageHeader className='title-header' title="Roulette Statistics" />
-      <Row gutter={14}>
-        <Col span={3} className="gutter-row" style={style}>
-          <label> Staket</label>
-          <Form labelCol={{ span: 1 }} layout="horizontal" initialValues={{ size: "small" }} prefix='Apuestas'>
-            <Form.Item name={'St1'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St2'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St3'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St4'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St5'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St6'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St7'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St8'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-          </Form>
-        </Col>
-        <Col span={3} className="gutter-row" style={style}>
-          <label> Win</label>
-          <Form labelCol={{ span: 1 }} layout="horizontal" initialValues={{ size: "small" }} prefix='Apuestas'>
-            <Form.Item name={'St1'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St2'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St3'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St4'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St5'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St6'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St7'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St8'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-          </Form>
-        </Col>
-        <Col span={3} className="gutter-row" style={style}>
-          <label> Dif</label>
-          <Form labelCol={{ span: 1 }} layout="horizontal" initialValues={{ size: "small" }} prefix='Apuestas'>
-            <Form.Item name={'St1'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St2'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St3'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St4'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St5'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St6'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St7'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St8'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-          </Form>
-        </Col>
-        <Col span={3} className="gutter-row" style={style}>
-          <label> In</label>
-          <Form labelCol={{ span: 1 }} layout="horizontal" initialValues={{ size: "small" }} prefix='Apuestas'>
-            <Form.Item name={'St1'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St2'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St3'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St4'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St5'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St6'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St7'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St8'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-          </Form>
-        </Col>
-        <Col span={3} className="gutter-row" style={style}>
-          <label> Out</label>
-          <Form labelCol={{ span: 1 }} layout="horizontal" initialValues={{ size: "small" }} prefix='Apuestas'>
-            <Form.Item name={'St1'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St2'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St3'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St4'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St5'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St6'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St7'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St8'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-          </Form>
-        </Col>
-        <Col span={3} className="gutter-row" style={style}>
-          <label> Profit</label>
-          <Form labelCol={{ span: 1 }} layout="horizontal" initialValues={{ size: "small" }} prefix='Apuestas'>
-            <Form.Item name={'St1'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered readOnly/>
-            </Form.Item>
-            <Form.Item name={'St2'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St3'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St4'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St5'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St6'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St7'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-            <Form.Item name={'St8'} rules={[{ required: true, message: 'This field is required' }]} style={{ marginBottom: '8px' }}>
-              <Input type={'number'} placeholder="St1" bordered />
-            </Form.Item>
-          </Form>
-        </Col>
-        <Col xs={24} sm={24} md={7} lg={5} xl={{ span:4 }}>
-          <Button type='primary' htmlType='submit' block>
-            <PlusCircleFilled />
-            Add Todo
-          </Button>
-        </Col>
-      </Row>
-    </Col>
-  );
+  return (<>  </>)
 }
+
+
+
+
+// const style = React.CSSProperties = { padding: '8px ,0' };
+// const EditableContext = React.createContext(null);
+
+
+// const EditableRow = ({ index, ...props }) => {
+//   const [form] = Form.useForm();
+//   return (
+//     <Form form={form} component={false}>
+//       <EditableContext.Provider value={form}>
+//         <tr {...props} />
+//       </EditableContext.Provider>
+//     </Form>
+//   );
+// };
+// const EditableCell = ({ title, editable, children, dataIndex, record, handleSave, ...restProps }) => {
+//   const [editing, setEditing] = useState(false);
+//   const inputRef = useRef(null);
+//   const form = useContext(EditableContext);
+//   useEffect(() => {
+//     if (editing) {
+//       inputRef.current.focus();
+//     }
+//   }, [editing]);
+
+//   const toggleEdit = () => {
+//     setEditing(!editing);
+//     form.setFieldsValue({
+//       [dataIndex]: record[dataIndex],
+//     });
+//   };
+//   const save = async () => {
+//     try {
+//       const values = await form.validateFields();
+//       toggleEdit();
+//       handleSave({ ...record, ...values });
+//     } catch (errInfo) {
+//       console.log('Save failed:', errInfo);
+//     }
+//   };
+
+//   let childNode = children;
+//   if (editable) {
+//     childNode = editing ? (
+//       <Form.Item
+//         style={{
+//           margin: 0,
+//         }}
+//         name={dataIndex}
+//         rules={[
+//           {
+//             required: true,
+//             message: `${title} is required.`,
+//           },
+//         ]}
+//       >
+//         <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+//       </Form.Item>
+//     ) : (
+//       <div
+//         className="editable-cell-value-wrap"
+//         style={{
+//           paddingRight: 24,
+//         }}
+//         onClick={toggleEdit}
+//       >
+//         {children}
+//       </div>
+//     );
+//   }
+//   return <td {...restProps}>{childNode}</td>;
+// };
+
+// const RultaPage = () => {
+//   const [stakeValues, setStakeValues] = useState({});
+//   function handleChange(e) {
+//     const { key, value } = e.target;
+//     setStakeValues({ ...stakeValues, [key]: value });
+//   }
+//   const [dataSource, setDataSource] = useState([
+//     {
+//       key: '0',
+//       estacion: '1',
+//       in: '0',
+//       out: '0',
+//     },
+//     {
+//       key: '1',
+//       estacion: '2',
+//       in: '0',
+//       out: '0',
+//     },
+//   ]);
+//   const [count, setCount] = useState(2);
+
+//   const handleDelete = (key) => {
+//     const newData = dataSource.filter((item) => item.key !== key);
+//     setDataSource(newData);
+//   };
+
+//   const defaultColumns = [
+//     {
+//       title: 'St',
+//       dataIndex: 'estacion',
+//       width: '20%',
+//       editable: true,
+//     },
+//     {
+//       title: 'In',
+//       dataIndex: 'in',
+//       width: '20%',
+//       editable: true,
+//     },
+//     {
+//       title: 'Out',
+//       dataIndex: 'out',
+//       editable: true,
+//     },
+//     {
+//       title: 'Profit',
+//       dataIndex: 'profit',
+//       editable: true,
+//     },
+//     {
+//       title: 'operation',
+//       dataIndex: 'operation',
+//       render: (_, record) =>
+//         dataSource.length >= 1 ? (
+//           <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+//             <a>Delete</a>
+//           </Popconfirm>
+//         ) : null,
+//     },
+//   ];
+
+//   const handleAdd = () => {
+//     const newData = {
+//       key: count,
+//       name: `Edward King ${count}`,
+//       age: '32',
+//       address: `London, Park Lane no. ${count}`,
+//     };
+//     setDataSource([...dataSource, newData]);
+//     setCount(count + 1);
+//   };
+
+//   const handleSave = (row) => {
+//     const newData = [...dataSource];
+//     const index = newData.findIndex((item) => row.key === item.key);
+//     const item = newData[index];
+//     newData.splice(index, 1, { ...item, ...row });
+//     setDataSource(newData);
+//   };
+
+//   const components = {
+//     body: {
+//       row: EditableRow,
+//       cell: EditableCell,
+//     },
+//   };
+//   const columns = defaultColumns.map((col) => {
+//     if (!col.editable) {
+//       return col;
+//     }
+//     return {
+//       ...col,
+//       onCell: (record) => ({
+//         record,
+//         editable: col.editable,
+//         dataIndex: col.dataIndex,
+//         title: col.title,
+//         handleSave,
+//       }),
+//     };
+//   });
+
+
+//   return (
+//     <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 18 }} lg={{ span: 18 }} xl={{ span: 24 }}>
+//       <PageHeader className='title-header' title="Roulette Statistics" />
+//       <Row gutter={14}>
+//         <Col span={2}></Col>
+//         <Col>
+//           <Button onClick={handleAdd} type="primary" style={{ marginBottom: 16, }}>
+//             Add a row
+//           </Button>
+//         </Col>
+//         <Col span={14}>
+//           <Table components={components} rowClassName={() => 'editable-row'} bordered dataSource={dataSource} columns={columns} />
+//         </Col>
+
+//       </Row>
+//     </Col>
+//   );
+// }
 
 export default RultaPage;
