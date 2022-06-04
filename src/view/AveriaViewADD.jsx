@@ -8,7 +8,7 @@ setOptions({
   themeVariant: 'light'
 });
 
-function AveriaViewADD() {
+function AveriaViewADD() { 
   return (
     <Page>
       <div className="mbsc-grid">

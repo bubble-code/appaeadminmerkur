@@ -1,235 +1,85 @@
-import React, { useContext, useState, useEffect, useRef , createElement, useCallback} from 'react';
-import { Row, Col, PageHeader, Table, Input, Button, Popconfirm, Form } from 'antd';
-import 'antd/dist/antd.css';
-import { PlusCircleFilled } from '@ant-design/icons'
-import { useTable } from 'react-table';
+import React, { useState, CSSProperties } from 'react';
+import ReactDataSheet from 'react-datasheet';
+import "react-datasheet/lib/react-datasheet.css";
+import Datasheet from 'react-datasheet';
+import { Row, Col, Divider } from 'antd';
+import "../styles/StyleDivTable.css";
 
 
-// let table = createTable()
-//   .setRowType()
-//   .setTableMetaType();
-const defaultColumns = {
-  cell: ({ getValue, row: { index }, column: { id }, instace }) => {
-    const initialValue = getValue();
-    const [value, setValue] = useState(initialValue);
-    const onBlur = () => {
-      var _a;
-      (_a = instace.options.meta) == null || _a === void 0 ? void 0 : _a.updateData(index, id, value);
-    }
-    useEffect(() => {
-      setValue(initialValue);
-    }, [initialValue]);
-    return (createElement(Input, { value: value, onChange: e => setValue(e.target.value), onBlur: onBlur }));
+
+
+const RuletaDataSheett = () => {
+  const [value, setValue] = useState({
+    grid: [
+      [
+        { value: "Stations", readOnly: true },
+        { value: "In", readOnly: true },
+        { value: "Out", readOnly: true },
+        { value: "Profit", readOnly: true },
+        { value: "Stake", readOnly: true },
+        { value: "Win", readOnly: true },
+        { value: "Dif", readOnly: true }
+      ],
+      [
+        { readOnly: true, value: "St1" },
+        { value: 1 },
+        { value: 3 },
+        { value: 0 },
+        { value: 3 },
+        { value: 3 },
+        { value: 3 },
+      ],
+      [
+        { readOnly: true, value: "St2" },
+        { value: 2 },
+        { value: 4 },
+        { value: 0 },
+        { value: 4 },
+        { value: 4 },
+        { value: 4 },
+      ],
+      [
+        { readOnly: true, value: "St3" },
+        { value: 1 },
+        { value: 3 },
+        { value: 0 },
+        { value: 3 },
+        { value: 3 },
+        { value: 3 },
+      ],
+      [
+        { readOnly: true, value: 4 },
+        { value: 2 },
+        { value: 4 },
+        { value: 4 },
+        { value: 4 },
+        { value: 4 },
+        { value: 4 },
+      ]
+    ]
   }
-};
+  );
+  const onCellsChanged = changes => {
+    const grid = value.grid;
+    changes.forEach(({ cell, row, col, value }) => {
+      grid[row][col] = { ...grid[row][col], value };
+    });
+    setValue({ grid });
+  }
+  const renderValues = (cell, i, j) => {
+    return j === 3 ? (parseFloat(value.grid[i][1].value) + parseFloat(value.grid[i][2].value)) : j === 6 ? (parseFloat(value.grid[i][4].value) + parseFloat(value.grid[i][5].value)) : cell.value;
+  }
 
-function useSkipper(){
-  const shouldSkipRef  = useRef(true);
-  const shouldSkip = shouldSkipRef.current;
-  const skip = useCallback
+  return (
+    <Row gutter={{ xs: 16, sm: 16, md: 24, lg: 32 }}>
+      <Col span={8} className="gutter-row">
+        <Divider orientation="left">Datos de Ruleta </Divider>
+        <div className="sheet-container">
+          <Datasheet data={value.grid} valueRenderer={renderValues} onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null} onCellsChanged={onCellsChanged} />
+        </div>
+      </Col>
+    </Row>
+  )
 }
 
-const RultaPage = () => {
-
-  return (<>  </>)
-}
-
-
-
-
-// const style = React.CSSProperties = { padding: '8px ,0' };
-// const EditableContext = React.createContext(null);
-
-
-// const EditableRow = ({ index, ...props }) => {
-//   const [form] = Form.useForm();
-//   return (
-//     <Form form={form} component={false}>
-//       <EditableContext.Provider value={form}>
-//         <tr {...props} />
-//       </EditableContext.Provider>
-//     </Form>
-//   );
-// };
-// const EditableCell = ({ title, editable, children, dataIndex, record, handleSave, ...restProps }) => {
-//   const [editing, setEditing] = useState(false);
-//   const inputRef = useRef(null);
-//   const form = useContext(EditableContext);
-//   useEffect(() => {
-//     if (editing) {
-//       inputRef.current.focus();
-//     }
-//   }, [editing]);
-
-//   const toggleEdit = () => {
-//     setEditing(!editing);
-//     form.setFieldsValue({
-//       [dataIndex]: record[dataIndex],
-//     });
-//   };
-//   const save = async () => {
-//     try {
-//       const values = await form.validateFields();
-//       toggleEdit();
-//       handleSave({ ...record, ...values });
-//     } catch (errInfo) {
-//       console.log('Save failed:', errInfo);
-//     }
-//   };
-
-//   let childNode = children;
-//   if (editable) {
-//     childNode = editing ? (
-//       <Form.Item
-//         style={{
-//           margin: 0,
-//         }}
-//         name={dataIndex}
-//         rules={[
-//           {
-//             required: true,
-//             message: `${title} is required.`,
-//           },
-//         ]}
-//       >
-//         <Input ref={inputRef} onPressEnter={save} onBlur={save} />
-//       </Form.Item>
-//     ) : (
-//       <div
-//         className="editable-cell-value-wrap"
-//         style={{
-//           paddingRight: 24,
-//         }}
-//         onClick={toggleEdit}
-//       >
-//         {children}
-//       </div>
-//     );
-//   }
-//   return <td {...restProps}>{childNode}</td>;
-// };
-
-// const RultaPage = () => {
-//   const [stakeValues, setStakeValues] = useState({});
-//   function handleChange(e) {
-//     const { key, value } = e.target;
-//     setStakeValues({ ...stakeValues, [key]: value });
-//   }
-//   const [dataSource, setDataSource] = useState([
-//     {
-//       key: '0',
-//       estacion: '1',
-//       in: '0',
-//       out: '0',
-//     },
-//     {
-//       key: '1',
-//       estacion: '2',
-//       in: '0',
-//       out: '0',
-//     },
-//   ]);
-//   const [count, setCount] = useState(2);
-
-//   const handleDelete = (key) => {
-//     const newData = dataSource.filter((item) => item.key !== key);
-//     setDataSource(newData);
-//   };
-
-//   const defaultColumns = [
-//     {
-//       title: 'St',
-//       dataIndex: 'estacion',
-//       width: '20%',
-//       editable: true,
-//     },
-//     {
-//       title: 'In',
-//       dataIndex: 'in',
-//       width: '20%',
-//       editable: true,
-//     },
-//     {
-//       title: 'Out',
-//       dataIndex: 'out',
-//       editable: true,
-//     },
-//     {
-//       title: 'Profit',
-//       dataIndex: 'profit',
-//       editable: true,
-//     },
-//     {
-//       title: 'operation',
-//       dataIndex: 'operation',
-//       render: (_, record) =>
-//         dataSource.length >= 1 ? (
-//           <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-//             <a>Delete</a>
-//           </Popconfirm>
-//         ) : null,
-//     },
-//   ];
-
-//   const handleAdd = () => {
-//     const newData = {
-//       key: count,
-//       name: `Edward King ${count}`,
-//       age: '32',
-//       address: `London, Park Lane no. ${count}`,
-//     };
-//     setDataSource([...dataSource, newData]);
-//     setCount(count + 1);
-//   };
-
-//   const handleSave = (row) => {
-//     const newData = [...dataSource];
-//     const index = newData.findIndex((item) => row.key === item.key);
-//     const item = newData[index];
-//     newData.splice(index, 1, { ...item, ...row });
-//     setDataSource(newData);
-//   };
-
-//   const components = {
-//     body: {
-//       row: EditableRow,
-//       cell: EditableCell,
-//     },
-//   };
-//   const columns = defaultColumns.map((col) => {
-//     if (!col.editable) {
-//       return col;
-//     }
-//     return {
-//       ...col,
-//       onCell: (record) => ({
-//         record,
-//         editable: col.editable,
-//         dataIndex: col.dataIndex,
-//         title: col.title,
-//         handleSave,
-//       }),
-//     };
-//   });
-
-
-//   return (
-//     <Col xs={{ span: 24 }} sm={{ span: 18 }} md={{ span: 18 }} lg={{ span: 18 }} xl={{ span: 24 }}>
-//       <PageHeader className='title-header' title="Roulette Statistics" />
-//       <Row gutter={14}>
-//         <Col span={2}></Col>
-//         <Col>
-//           <Button onClick={handleAdd} type="primary" style={{ marginBottom: 16, }}>
-//             Add a row
-//           </Button>
-//         </Col>
-//         <Col span={14}>
-//           <Table components={components} rowClassName={() => 'editable-row'} bordered dataSource={dataSource} columns={columns} />
-//         </Col>
-
-//       </Row>
-//     </Col>
-//   );
-// }
-
-export default RultaPage;
+export default RuletaDataSheett;
