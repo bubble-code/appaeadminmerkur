@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row } from 'antd';
+import { Col, Row, Card, Statistic } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import MenuLeftRouleta from '../component/RuletaComponent/MenuLeft'
 import TableBettingProfits from '../component/RuletaComponent/TableDatosApuesBeneficios';
 import { Grafico } from '../component/RuletaComponent/Grafico'
@@ -153,19 +154,22 @@ const RuletaDataSheett = () => {
   }
   return (
     <Row>
-      <Col span={5} className="gutter-row" offset={0}>
+      <Col span={5} className="gutter-row" offset={0} >
         <MenuLeftRouleta setSelectedKey={setSelectedKey} />
       </Col>
       <Col>
-        <Row gutter={{ xs: 20, sm: 20, md: 20, lg: 26 }} >
-          {selectedKey ? <TableBettingProfits datashow={dataGrid.grid} halls={halls[selectedKey - 1].salon} setDataGrid={updateDataGrid} /> : <></>}
-          {selectedKey ? <Grafico arrayData={dataGrid.grid} tituloGrafico={"Entradas / Salidas"} label1={"Entradas"} label2={"Salidas"} index1={1} index2={2} /> : <></>}
+        <Row gutter={{ xs: 20, sm: 20, md: 20, lg: 26 }} style={{width:'750px'}} >
+          <Col style={{width:'190px'}}>
+            {selectedKey ? <TableBettingProfits datashow={dataGrid.grid} halls={halls[selectedKey - 1].salon} setDataGrid={updateDataGrid} /> : <></>}
+          </Col>
+          <Col style={{width:'170px'}} offset={10} >
+            {selectedKey ? <Grafico arrayData={dataGrid.grid} tituloGrafico={"Entradas / Salidas"} label1={"Entradas"} label2={"Salidas"} index1={1} index2={2} /> : <></>}
+            {selectedKey ? <Grafico arrayData={dataGrid.grid} tituloGrafico={"Apuestas / Beneficios"} label1={"Apuestas"} label2={"Beneficios"} index1={4} index2={5} /> : <></>}
+          </Col>
         </Row>
         <Row gutter={{ xs: 20, sm: 20, md: 20, lg: 26 }} >
           <Col span={8} className="gutter-row" offset={0}>
-
           </Col>
-          {selectedKey ? <Grafico arrayData={dataGrid.grid} tituloGrafico={"Apuestas / Beneficios"} label1={"Apuestas"} label2={"Beneficios"} index1={4} index2={5} /> : <></>}
         </Row>
       </Col>
     </Row>

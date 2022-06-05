@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import "react-datasheet/lib/react-datasheet.css";
 import Datasheet from 'react-datasheet';
-import { Col, Divider, Form, Button } from 'antd';
-import { useEffect } from 'react';
+import { Col, Divider, Card, Button, Statistic, Row } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 
 
 const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
+  const [porcentajeInOut, setPorcentajeInOut] = useState(0);
+  const [porcentaApueBenef, setPorcentajeApueBenef] = useState(0);
   const dataSubmit = [];
   const resetTable = () => {
     const grid = datashow.slice(0);
@@ -16,6 +18,7 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
       }
     }
     setDataGrid(grid);
+    setPorcentajeInOut(0);
   }
   const copyTable = () => {
     const table = document.querySelector('.myTable');
@@ -45,6 +48,8 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
       }
       grid[grid.length - 1][col].value = total
     });
+    let temPorceInOut = parseFloat((parseFloat(grid[grid.length - 1][2].value) / parseFloat(grid[grid.length - 1][1].value)) * 100);
+    setPorcentajeInOut(temPorceInOut);
     setDataGrid(grid);
   }
   const renderValues = (cell, i, j) => {
@@ -66,9 +71,41 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
       <div className="sheet-container">
         <Datasheet data={datashow} valueRenderer={renderValues} onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null} onCellsChanged={onCellsChanged} className="myTable" />
       </div>
-      <Button type="primary" htmlType="button" onClick={() => copyTable()} style={{ alignItems: "flex-end" }}>
-        Submit
-      </Button>
+      <Row gutter={{ xs: 26, sm: 26, md: 26, lg: 32 }} style={{ width: '400px' }}>
+        <Col >
+          <Card style={{ marginTop: '10px' }}>
+            <Statistic
+              title="Porcentaje In/Out"
+              value={porcentajeInOut}
+              precision={2}
+              valueStyle={{
+                color: '#3f8600',
+              }}
+              // prefix={<ArrowUpOutlined />}
+              suffix="%"
+            />
+          </Card>
+        </Col>
+        <Col >
+          < Card style={{ marginTop: '10px' }} >
+            <Statistic
+              title="Apuestas/Beneficios"
+              value={porcentaApueBenef}
+              precision={2}
+              valueStyle={{
+                color: '#cf1322',
+              }}
+              prefix={<ArrowDownOutlined />}
+              suffix="%"
+            />
+          </Card>
+        </Col>
+        <Col >
+          <Button type="primary" htmlType="button" onClick={() => copyTable()} style={{ marginTop: '50px' }}>
+            Submit
+          </Button>
+        </Col>
+      </Row>
     </Col>
   )
 }
