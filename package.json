@@ -12,8 +12,11 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.20.6",
     "axios": "^0.26.1",
+    "chart.js": "^3.8.0",
+    "faker": "^6.6.6",
     "google-map-react": "^2.1.10",
     "react": "^18.0.0",
+    "react-chartjs-2": "^4.1.0",
     "react-datasheet": "^1.4.12",
     "react-dom": "^18.0.0",
     "react-redux": "^7.2.8",
@@ -45,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.1.0"
   }
 }

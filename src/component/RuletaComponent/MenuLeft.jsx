@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Switch, Divider } from 'antd';
+import { Menu } from 'antd';
 import { MailOutlined, CalendarOutlined, AppstoreOutlined, SettingOutlined, LinkOutlined, } from '@ant-design/icons';
 
 
@@ -32,15 +32,18 @@ const items = [
   getItem('Rouletas Navarra', 'sub4', <SettingOutlined />, [
     getItem('Alsasua', '17'),
     getItem('Olite', '18'),
-    getItem('Tudela', '9'),
-    getItem('Mendevaldea', '21'),
+    getItem('Tudela', '19'),
+    getItem('Mendevaldea', '20'),
   ]),
 ];
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
-const MenuLeftRuleta = () => {
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4'];
+const MenuLeftRuleta = ({ setSelectedKey }) => {
 
   const [openKeys, setOpenKeys] = useState([]);
-  const omOpenChange = keys => {
+  const onSelectedKey = ({ item, key }) => {
+    setSelectedKey(key);
+  }
+  const onOpenChange = keys => {
     const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       setOpenKeys(keys);
@@ -50,7 +53,7 @@ const MenuLeftRuleta = () => {
   };
 
   return (
-    <Menu mode="inline" openKeys={openKeys} onOpenChange={omOpenChange} style={{ width: 256 }} items={items} />
+    <Menu mode="inline" openKeys={openKeys} onOpenChange={onOpenChange} style={{ width: 256 }} items={items} onSelect={onSelectedKey} />
   )
 };
 
