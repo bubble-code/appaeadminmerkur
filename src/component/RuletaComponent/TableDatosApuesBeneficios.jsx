@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addDataRoulete } from '../../app/actions/actions';
 import "react-datasheet/lib/react-datasheet.css";
 import Datasheet from 'react-datasheet';
-import { Col, Divider, Card, Button, Statistic, Row } from 'antd';
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { Col, Divider, Card, Button, Statistic, Row, Space, DatePicker } from 'antd';
 
 
 
-const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
+const TableDataRouleta = ({ datashow, setDataGrid, halls, setDate, date }) => {
   const [porcentajeInOut, setPorcentajeInOut] = useState(0);
-  const [porcentaApueBenef, setPorcentajeApueBenef] = useState(0);
-  const dataSubmit = [];
+  const [porceBetProfit, setPorceBetProfit] = useState(0);
+  const dispatch = useDispatch();
+  const dataRoulette = [];
   const resetTable = () => {
     const grid = datashow.slice(0);
     for (let i = 1; i < datashow.length; i++) {
@@ -19,11 +21,13 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
     }
     setDataGrid(grid);
     setPorcentajeInOut(0);
+    setPorceBetProfit(0);
+    setDate("");
   }
-  const copyTable = () => {
+  const saveData = () => {
     const table = document.querySelector('.myTable');
     const row = [...table.querySelectorAll('tr')];
-    for (let i = 0; i < row.length; i++) {
+    for (let i = 1; i < row.length - 1; i++) {
       let col = [...row[i].querySelectorAll('td')];
       let St = col[0].innerText;
       let In = col[1].innerText;
@@ -32,10 +36,11 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
       let Stake = col[4].innerText;
       let Win = col[5].innerText;
       let Dif = col[6].innerText;
-      dataSubmit.push({ St, In, Out, Profit, Stake, Win, Dif });
+      dataRoulette.push({ St, In, Out, Profit, Stake, Win, Dif });
     }
     resetTable();
-    console.log(dataSubmit);
+    dispatch(addDataRoulete({ halls, dataRoulette }));
+    // console.log(dataSubmit);
   }
   const onCellsChanged = changes => {
     const grid = datashow.slice(0);
@@ -49,7 +54,9 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
       grid[grid.length - 1][col].value = total
     });
     let temPorceInOut = parseFloat((parseFloat(grid[grid.length - 1][2].value) / parseFloat(grid[grid.length - 1][1].value)) * 100);
+    let temPorceBetProfit = parseFloat((parseFloat(grid[grid.length - 1][5].value) / parseFloat(grid[grid.length - 1][4].value)) * 100);
     setPorcentajeInOut(temPorceInOut);
+    setPorceBetProfit(temPorceBetProfit);
     setDataGrid(grid);
   }
   const renderValues = (cell, i, j) => {
@@ -68,6 +75,11 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
 
     <Col span={8} className="gutter-row" offset={0}>
       <Divider orientation="left" style={{ border: 'black' }}>{halls} Contadores </Divider>
+      <Space direction="vertical" style={{ width: '220px' }}>
+        <span> Fecha:
+          <DatePicker onChange={value => { setDate(value) }} value={date} placeholder='Seleccione la fecha' />
+        </span>
+      </Space>
       <div className="sheet-container">
         <Datasheet data={datashow} valueRenderer={renderValues} onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null} onCellsChanged={onCellsChanged} className="myTable" />
       </div>
@@ -90,18 +102,18 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls }) => {
           < Card style={{ marginTop: '10px' }} >
             <Statistic
               title="Apuestas/Beneficios"
-              value={porcentaApueBenef}
+              value={porceBetProfit}
               precision={2}
               valueStyle={{
                 color: '#cf1322',
               }}
-              prefix={<ArrowDownOutlined />}
+              // prefix={<ArrowDownOutlined />}
               suffix="%"
             />
           </Card>
         </Col>
         <Col >
-          <Button type="primary" htmlType="button" onClick={() => copyTable()} style={{ marginTop: '50px' }}>
+          <Button type="primary" htmlType="button" onClick={() => saveData()} style={{ marginTop: '50px' }}>
             Submit
           </Button>
         </Col>

@@ -1,4 +1,4 @@
-import { LIST_SALONES_COMUNIDAD, LIST_AVERIAS_SALON, LIST_CHECKLIST, CREATE_CHECKLIST, DELETE_CHECKLIST, ADD_SALON, LIST_COMUNIDAD } from './types';
+import { LIST_SALONES_COMUNIDAD, LIST_AVERIAS_SALON, LIST_CHECKLIST, CREATE_CHECKLIST, DELETE_CHECKLIST, ADD_SALON, LIST_COMUNIDAD, ADD_DATA_ROULETTE } from './types';
 import DataServices from '../../services/services'
 
 export const listComunidades = () => async (dispatch) => {
@@ -83,3 +83,15 @@ export const deleteCheckList = (id) => async (dispatch) => {
     console.log(err);
   }
 };
+
+export const addDataRoulete = (data) => async (dispatch) => {
+  try {
+    const res = await DataServices.addDataRoulete(data);
+    dispatch({
+      type: ADD_DATA_ROULETTE,
+      payload: res.data
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}

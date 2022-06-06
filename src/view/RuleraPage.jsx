@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Card, Statistic } from 'antd';
+import { Col, Row, DatePicker, Space } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import MenuLeftRouleta from '../component/RuletaComponent/MenuLeft'
 import TableBettingProfits from '../component/RuletaComponent/TableDatosApuesBeneficios';
@@ -134,6 +134,7 @@ const grid = [
 const RuletaDataSheett = () => {
   const [selectedKey, setSelectedKey] = useState();
   const [dataGrid, setDataGrid] = useState({ grid: [] });
+  const [date, setDate] = useState();
 
   useEffect(() => {
     if (selectedKey) {
@@ -158,11 +159,12 @@ const RuletaDataSheett = () => {
         <MenuLeftRouleta setSelectedKey={setSelectedKey} />
       </Col>
       <Col>
-        <Row gutter={{ xs: 20, sm: 20, md: 20, lg: 26 }} style={{width:'750px'}} >
-          <Col style={{width:'190px'}}>
-            {selectedKey ? <TableBettingProfits datashow={dataGrid.grid} halls={halls[selectedKey - 1].salon} setDataGrid={updateDataGrid} /> : <></>}
+        <Row gutter={{ xs: 20, sm: 20, md: 20, lg: 26 }} style={{ width: '750px' }} >
+          <Col style={{ width: '190px' }}>
+            {selectedKey ? <TableBettingProfits datashow={dataGrid.grid} halls={halls[selectedKey - 1].salon} setDataGrid={updateDataGrid} date={date} setDate={setDate} /> : <></>}
+
           </Col>
-          <Col style={{width:'170px'}} offset={10} >
+          <Col style={{ width: '170px' }} offset={10} >
             {selectedKey ? <Grafico arrayData={dataGrid.grid} tituloGrafico={"Entradas / Salidas"} label1={"Entradas"} label2={"Salidas"} index1={1} index2={2} /> : <></>}
             {selectedKey ? <Grafico arrayData={dataGrid.grid} tituloGrafico={"Apuestas / Beneficios"} label1={"Apuestas"} label2={"Beneficios"} index1={4} index2={5} /> : <></>}
           </Col>

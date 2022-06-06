@@ -23,6 +23,9 @@ class DataServices {
   deleteCheckList(id) {
     return http.delete(`/checklist/${id}`);
   }
+addDataRoulete(values) {
+  return http.post('/dataRoulete', values);
+}
 
 }
 
