@@ -11,10 +11,10 @@ const halls = [
   { salon: "Alcobendas", roulet: 8 },
   { salon: "Alcala 260", roulet: 8 },
   { salon: "Alcala 610", roulet: 8 },
-  { salon: "Mejorada", roulet: 6 },
+  { salon: "Mejorada del campo", roulet: 6 },
   { salon: "Carabanchel", roulet: 8 },
-  { salon: "Oca 22", roulet: 8 },
-  { salon: "Villanueva", roulet: 8 },
+  { salon: "Carabanchel 2", roulet: 8 },
+  { salon: "Villanueva de la Cañada", roulet: 8 },
   { salon: "Tropicana", roulet: 10 },
   { salon: "Tropicana", roulet: 6 },
   { salon: "Fortuna", roulet: 8 },
@@ -134,7 +134,7 @@ const grid = [
 const RuletaDataSheett = () => {
   const [selectedKey, setSelectedKey] = useState();
   const [dataGrid, setDataGrid] = useState({ grid: [] });
-  const [date, setDate] = useState();
+  const [date, setDate] = useState({ value: "", dateString: "" });
 
   useEffect(() => {
     if (selectedKey) {
@@ -161,7 +161,7 @@ const RuletaDataSheett = () => {
       <Col>
         <Row gutter={{ xs: 20, sm: 20, md: 20, lg: 26 }} style={{ width: '750px' }} >
           <Col style={{ width: '190px' }}>
-            {selectedKey ? <TableBettingProfits datashow={dataGrid.grid} halls={halls[selectedKey - 1].salon} setDataGrid={updateDataGrid} date={date} setDate={setDate} /> : <></>}
+            {selectedKey ? <TableBettingProfits datashow={dataGrid.grid} halls={halls[selectedKey - 1].salon} setDataGrid={updateDataGrid} dates={date} setDate={setDate} /> : <></>}
 
           </Col>
           <Col style={{ width: '170px' }} offset={10} >

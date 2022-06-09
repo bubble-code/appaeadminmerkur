@@ -7,7 +7,7 @@ import { Col, Divider, Card, Button, Statistic, Row, Space, DatePicker } from 'a
 
 
 
-const TableDataRouleta = ({ datashow, setDataGrid, halls, setDate, date }) => {
+const TableDataRouleta = ({ datashow, setDataGrid, halls, setDate, dates }) => {
   const [porcentajeInOut, setPorcentajeInOut] = useState(0);
   const [porceBetProfit, setPorceBetProfit] = useState(0);
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls, setDate, date }) => {
   const saveData = () => {
     const table = document.querySelector('.myTable');
     const row = [...table.querySelectorAll('tr')];
-    for (let i = 1; i < row.length - 1; i++) {
+    for (let i = 1; i < row.length; i++) {
       let col = [...row[i].querySelectorAll('td')];
       let St = col[0].innerText;
       let In = col[1].innerText;
@@ -39,7 +39,8 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls, setDate, date }) => {
       dataRoulette.push({ St, In, Out, Profit, Stake, Win, Dif });
     }
     resetTable();
-    dispatch(addDataRoulete({ halls, dataRoulette }));
+    const date = dates.dateString
+    dispatch(addDataRoulete({ halls, dataRoulette, date }));
     // console.log(dataSubmit);
   }
   const onCellsChanged = changes => {
@@ -53,18 +54,18 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls, setDate, date }) => {
       }
       grid[grid.length - 1][col].value = total
     });
-    let temPorceInOut = parseFloat((parseFloat(grid[grid.length - 1][2].value) / parseFloat(grid[grid.length - 1][1].value)) * 100);
-    let temPorceBetProfit = parseFloat((parseFloat(grid[grid.length - 1][5].value) / parseFloat(grid[grid.length - 1][4].value)) * 100);
+    let temPorceInOut = parseFloat((parseFloat(grid[grid.length - 1][2].value).toFixed(2) / parseFloat(grid[grid.length - 1][1].value).toFixed(2)) * 100).toFixed(2);
+    let temPorceBetProfit = parseFloat((parseFloat(grid[grid.length - 1][5].value).toFixed(2) / parseFloat(grid[grid.length - 1][4].value).toFixed(2)) * 100).toFixed(2);
     setPorcentajeInOut(temPorceInOut);
     setPorceBetProfit(temPorceBetProfit);
     setDataGrid(grid);
   }
   const renderValues = (cell, i, j) => {
     if (j === 3 && cell.value !== "Profit") {
-      return (parseFloat(datashow[i][1].value) - parseFloat(datashow[i][2].value));
+      return (parseFloat(datashow[i][1].value).toFixed(2) - parseFloat(datashow[i][2].value).toFixed(2)).toFixed(2);
     }
     else if (j === 6 && cell.value !== "Dif") {
-      return (parseFloat(datashow[i][4].value) - parseFloat(datashow[i][5].value));
+      return (parseFloat(datashow[i][4].value).toFixed(2) - parseFloat(datashow[i][5].value).toFixed(2)).toFixed(2);
     }
     else {
       return cell.value;
@@ -77,7 +78,7 @@ const TableDataRouleta = ({ datashow, setDataGrid, halls, setDate, date }) => {
       <Divider orientation="left" style={{ border: 'black' }}>{halls} Contadores </Divider>
       <Space direction="vertical" style={{ width: '220px' }}>
         <span> Fecha:
-          <DatePicker onChange={value => { setDate(value) }} value={date} placeholder='Seleccione la fecha' />
+          <DatePicker onChange={(value, dateString) => { setDate({ value, dateString }) }} value={dates.value} placeholder='Seleccione la fecha' />
         </span>
       </Space>
       <div className="sheet-container">
